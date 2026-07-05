@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindSafe AI - Suicidal Ideation Detection</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- font-awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!--stylesheets-->
+    <link href="/static/styles/styles.css" rel='stylesheet' type='text/css' media="all">
+</head>
+
+<body>
+    <!-- Floating background blobs -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <section class="msger">
+        <header class="msger-header">
+            <div class="msger-header-title">
+                <span class="pulse-indicator"></span>
+                <div class="header-text-container">
+                    <h1 class="app-title">MindSafe AI</h1>
+                    <p class="app-subtitle">Suicidal Ideation Detection (RF + LSTM Ensemble)</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="msger-chat" id="new-res">
+            <!-- Bot Initial Message -->
+            <div class="msg left-msg animated-msg">
+                <div class="msg-avatar msg-avatar-bot">
+                    <i class="fas fa-robot"></i>
+                </div>
+
+                <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">MindSafe Bot</div>
+                        <div class="msg-info-time set-time"></div>
+                    </div>
+
+                    <div class="msg-text">
+                        Hello! I am MindSafe AI. You can send me any social media post or message, and I will analyze it using machine learning (Random Forest) and deep learning (LSTM) models to detect signs of suicidal ideation. 😄
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Guide Message -->
+            <div class="msg right-msg animated-msg">
+                <div class="msg-avatar msg-avatar-user">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">You</div>
+                        <div class="msg-info-time set-time"></div>
+                    </div>
+
+                    <div class="msg-text">
+                        Type a message in the input field below to run a real-time prediction.
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <form class="msger-inputarea" onsubmit="event.preventDefault()">
+            <input type="text" class="msger-input" placeholder="Type a message or post to analyze..." id="user-input" 
+                autocomplete="off" >
+            <button type="submit" class="msger-send-btn" onclick="submitHandler()">
+                <i class="fas fa-paper-plane"></i>
+                <span>Send</span>
+            </button>
+        </form>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>

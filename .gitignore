@@ -1,0 +1,9 @@
+*/.ipynb_checkpoints
+*/*/__pycache__
+*/__pycache__
+Src/Data_Creation.ipynb
+venv/
+*.pyc
+__pycache__/
+.ipynb_checkpoints/
+.system_generated/
