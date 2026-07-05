@@ -69,6 +69,31 @@ Performance metrics of the models on the test set:
 
 ---
 
+## 📸 Screenshots
+
+### 💬 Chat Interface — Risk Analysis Result
+<div align="center">
+  <img src="Assets/chat_ui.png" alt="MindSafe AI Chat Interface" width="90%">
+</div>
+
+> The chat UI shows a full analysis result card with severity score (0–100), model verdicts (RF + BiLSTM), confidence meters, key risk words, and detected emotions.
+
+### 📊 Analytics Dashboard
+<div align="center">
+  <img src="Assets/dashboard_ui.png" alt="MindSafe AI Analytics Dashboard" width="90%">
+</div>
+
+> The dashboard at `/dashboard` shows real-time stats: total analyses, risk distribution pie chart, emotion breakdown bar chart, and a recent analyses table.
+
+### 🆘 Crisis Intervention Modal
+<div align="center">
+  <img src="Assets/crisis_modal.png" alt="MindSafe AI Crisis Modal" width="60%">
+</div>
+
+> When **High** or **Critical** risk is detected, a crisis hotline modal auto-appears with clickable phone numbers for immediate mental health support.
+
+---
+
 ## 🗂️ Project Structure
 
 ```

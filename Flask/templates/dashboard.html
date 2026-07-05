@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindSafe AI — Analytics Dashboard</title>
+    <meta name="description" content="Analytics dashboard for MindSafe AI — view risk distribution, emotion breakdown, and recent analyses.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Styles -->
+    <link href="/static/styles/styles.css" rel='stylesheet' type='text/css' media="all">
+</head>
+
+<body class="dashboard-page">
+    <!-- Background blobs -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Dashboard Layout -->
+    <div class="dashboard-layout">
+
+        <!-- Sidebar -->
+        <aside class="dash-sidebar">
+            <div class="dash-logo">
+                <div class="dash-logo-icon"><i class="fas fa-brain"></i></div>
+                <div>
+                    <div class="dash-logo-title">MindSafe AI</div>
+                    <div class="dash-logo-sub">Analytics</div>
+                </div>
+            </div>
+            <nav class="dash-nav">
+                <a href="/" class="dash-nav-item">
+                    <i class="fas fa-comments"></i>
+                    <span>Chat Analysis</span>
+                </a>
+                <a href="/dashboard" class="dash-nav-item active">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+            </nav>
+            <div class="dash-sidebar-footer">
+                <button class="icon-btn theme-toggle" onclick="toggleTheme()" title="Toggle Theme" id="themeToggleBtn">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                <span style="font-size:0.75rem; opacity:0.5;">Theme</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dash-main">
+            <!-- Top Bar -->
+            <div class="dash-topbar">
+                <div>
+                    <h1 class="dash-page-title">Analytics Dashboard</h1>
+                    <p class="dash-page-sub">Real-time analysis metrics · Auto-refreshes every 30s</p>
+                </div>
+                <div class="dash-topbar-right">
+                    <div class="last-updated">Last updated: <span id="lastUpdated">—</span></div>
+                    <button class="refresh-btn" onclick="loadStats()" id="refreshBtn">
+                        <i class="fas fa-rotate-right"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card stat-total">
+                    <div class="stat-icon"><i class="fas fa-message"></i></div>
+                    <div class="stat-body">
+                        <div class="stat-value" id="statTotal">—</div>
+                        <div class="stat-label">Total Analyses</div>
+                    </div>
+                    <div class="stat-glow"></div>
+                </div>
+                <div class="stat-card stat-critical">
+                    <div class="stat-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                    <div class="stat-body">
+                        <div class="stat-value" id="statHighRisk">—</div>
+                        <div class="stat-label">High / Critical Risk</div>
+                    </div>
+                    <div class="stat-glow"></div>
+                </div>
+                <div class="stat-card stat-safe">
+                    <div class="stat-icon"><i class="fas fa-shield-heart"></i></div>
+                    <div class="stat-body">
+                        <div class="stat-value" id="statSafe">—</div>
+                        <div class="stat-label">Safe Messages</div>
+                    </div>
+                    <div class="stat-glow"></div>
+                </div>
+                <div class="stat-card stat-rate">
+                    <div class="stat-icon"><i class="fas fa-percent"></i></div>
+                    <div class="stat-body">
+                        <div class="stat-value" id="statRate">—</div>
+                        <div class="stat-label">Detection Rate</div>
+                    </div>
+                    <div class="stat-glow"></div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts-row">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h2 class="chart-title"><i class="fas fa-chart-pie"></i> Risk Distribution</h2>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="riskChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h2 class="chart-title"><i class="fas fa-chart-bar"></i> Emotion Breakdown</h2>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="emotionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Analyses Table -->
+            <div class="table-card">
+                <div class="chart-header">
+                    <h2 class="chart-title"><i class="fas fa-list-ul"></i> Recent Analyses</h2>
+                </div>
+                <div class="table-wrapper">
+                    <table class="analysis-table" id="recentTable">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Text Preview</th>
+                                <th>Risk Level</th>
+                                <th>Score</th>
+                                <th>RF Conf.</th>
+                                <th>LSTM Conf.</th>
+                                <th>Emotions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentTableBody">
+                            <tr><td colspan="7" style="text-align:center; opacity:0.5; padding:32px;">No data yet — run some analyses in the chat!</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/static/js/dashboard.js"></script>
+</body>
+
+</html>
